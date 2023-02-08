@@ -103,12 +103,11 @@ server <- function(input, output) {
     hmb_df <- hmb_df[between(hmb_df$longitude, hmb_longitude[1], hmb_longitude[2]),]
     
     polygon_df <- rbind(sf_pacifica_df, hmb_df)
+    polygon_df <- polygon_df[polygon_df$Group.Name %in% append(pbc_groups,""),]
     
     #combining both filtered data frames
     
     df <- rbind(groups_df, polygon_df)
-    
-    df <- df[df$Group.Name %in% append(pbc_groups,""),]
     
     df <- distinct(df)
     
